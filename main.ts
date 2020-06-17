@@ -52,7 +52,7 @@ if (hasName(myVariable)) {
     console.log(myVariable.name);
 }
 // as string is type assertion letting typescript know that we have manually checked that myVariable is a string
-(myVariable as string).toUpperCase();
+// (myVariable as string).toUpperCase();
 
 // because a is not assigned a value, ts will allow you to change the type assigned to a and can not infer what you wanted originally
 let a;
@@ -73,6 +73,102 @@ multiType = false;
 let anyType: any;
 anyType = 20;
 anyType = true;
+
+// normal js function
+function add(num1, num2) {
+    return num1 + num2;
+}
+
+// typescript function by giving a type to parameters
+
+// adding question mark at the end of the parameter allows you to only have to pass one argument and not throw errors
+function addTS(num1: number, num2?: number): number {
+    if (num2)
+        return num1 + num2
+    else
+        return num1;
+}
+
+addTS(5, 3);
+addTS(4)
+
+function addTSSetValueParameter(num1: number, num2: number = 10): number {
+    if (num2)
+        return num1 + num2;
+    else
+        return num1;
+}
+
+// both return 15 because you set a default value for num2 so the else never runs
+addTSSetValueParameter(5, 10)
+addTSSetValueParameter(5)
+
+
+interface Person {
+    firstName: string;
+    lastName?: string;
+}
+
+function fullName(person: Person) {
+    console.log(`${person.firstName} ${person.lastName}`);
+}
+
+let p = {
+    firstName: "Bruce",
+    lastName: "Wayne"
+};
+
+fullName(p);
+
+
+class Employee {
+    public employeeName: string;
+
+    constructor(name: string) {
+        this.employeeName = name;
+    }
+
+    greet() {
+        console.log(`Good Morning ${this.employeeName}`);
+    }
+}
+
+let employee1 = new Employee('John');
+console.log(employee1.employeeName);
+employee1.greet();
+
+class Manager extends Employee {
+    constructor(managerName: string) {
+        super(managerName);
+    }
+    delegateWork() {
+        console.log(`Manager delegating tasks`);
+    }
+}
+
+let m1 = new Manager('Bruce');
+m1.delegateWork();
+m1.greet();
+console.log(m1.employeeName);
+
+// access properties default is public
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
